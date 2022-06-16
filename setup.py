@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='s3-endpoint-parse',
-    version='1.0.1',
+    version='1.1.0',
     python_requires=">=3.6",
     description='Flexibly extract information from S3 endpoint URL/URI strings',
     long_description=long_description,

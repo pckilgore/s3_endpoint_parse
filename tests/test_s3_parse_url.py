@@ -1,4 +1,4 @@
-from s3_parse_url import parse
+from s3_endpoint_parse import parse
 
 bucket = "my-bucket"
 key = "path/to/object"
@@ -24,6 +24,7 @@ def virtual_hosted_style():
     host_fips = f"{bucket}.s3-fips.{region}.amazonaws.com"
     host_dual = f"{bucket}.s3.dualstack.{region}.amazonaws.com"
     host_both = f"{bucket}.s3-fips.dualstack.{region}.amazonaws.com"
+    host_cn = f"{bucket}.s3.{region}.amazonaws.com.cn"
 
     fixtures = [
         # (url, path, region)
@@ -39,6 +40,9 @@ def virtual_hosted_style():
         (f"https://{host_both}/{key}", key, region),
         (f"http://{host_both}/", '', region),
         (f"s3://{host_both}", '', region),
+        (f"https://{host_cn}/{key}", key, region),
+        (f"http://{host_cn}/", '', region),
+        (f"s3://{host_cn}", '', region),
     ]
 
 

@@ -2,30 +2,35 @@ from re import compile
 
 """
 Virtual Hosted Style
+
 http://BUCKET.s3.REGION.amazonaws.com/KEY
 """
-virtual_hosted_style = compile(r'^([^:]+)(?:://)([^.]+)\.s3(?:-fips|\.dualstack|-fips\.dualstack)?\.([^.]+)\.amazonaws\.com/?(.*?)$')
+virtual_hosted_style = compile(r'^([^:]+)(?:://)([^.]+)\.s3(?:-fips|\.dualstack|-fips\.dualstack)?\.([^.]+)\.amazonaws\.com(?:\.cn)?/?(.*?)$')
 
 """
 Path Style
+
 http://s3.REGION.amazonaws.com/BUCKET/KEY
 """
-path_style = compile(r'^([^:]+)(?:://)s3(?:-fips|\.dualstack|-fips\.dualstack)?\.([^.]+)\.amazonaws\.com/([^/]+)/?(.*?)$')
+path_style = compile(r'^([^:]+)(?:://)s3(?:-fips|\.dualstack|-fips\.dualstack)?\.([^.]+)\.amazonaws\.com(?:\.cn)?/([^/]+)/?(.*?)$')
 
 """
 Legacy Style Global Endpoint
+
 http://BUCKET.s3.amazonaws.com/KEY
 """
 legacy_global_endpoint = compile(r'^([^:]+)(?:://)([^.]+)\.s3\.amazonaws\.com/?(.*?)$')
 
 """
 Legacy Style Global Endpoint With Path
+
 http://s3.amazonaws.com/BUCKET/KEY
 """
 legacy_global_endpoint_with_path = compile(r'^([^:]+)(?:://)s3\.amazonaws\.com?/([^/]+)/?(.*?)$')
 
 """
 Legacy s3-region Style
+
 https://BUCKET.s3-REGION.amazonaws.com/KEY
 """
 legacy_s3region_style = compile(r'^([^:]+)(?:://)([^.]+)\.s3-([^.]+)\.amazonaws\.com/?(.*?)$')
@@ -33,6 +38,8 @@ legacy_s3region_style = compile(r'^([^:]+)(?:://)([^.]+)\.s3-([^.]+)\.amazonaws\
 def parse(url):
     """
     Parse the varying S3 URL forms into their parts into a dictionary:
+
+    ```
     {
         "match": bool,
         "protocol": string,
@@ -40,15 +47,19 @@ def parse(url):
         "key": string,
         "region": string
     }
+    ```
 
-    "match" key is False if unable to parse input
+    "match" key is False if unable to parse the input string
 
-    E.g.:
-     - s3://my-bucket.s3-fips.us-east-1.amazonaws.com/path/to/obj
-     - http://s3.amazonaws.com/my-bucket/path/to/obj
-     - https://s3.us-east-1.amazonaws.com/my-bucket/path/to/obj
+    For example:
 
-    See generally: https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html
+        - s3://my-bucket.s3-fips.us-east-1.amazonaws.com/path/to/obj
+        - http://s3.amazonaws.com/my-bucket/path/to/obj
+        - https://s3.us-east-1.amazonaws.com/my-bucket/path/to/obj
+
+    See generally:
+
+    https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html
     """
 
     result = {
