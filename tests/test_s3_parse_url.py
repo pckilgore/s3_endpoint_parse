@@ -45,6 +45,13 @@ def virtual_hosted_style():
         (f"s3://{host_cn}", '', region),
     ]
 
+    for (url, want_key, want_region) in fixtures:
+        got = parse(url)
+        assert got["match"] is True
+        assert got["bucket"] == bucket
+        assert got["key"] == want_key
+        assert got["region"] == want_region
+
 
 def test_path_style():
     host = f"s3.{region}.amazonaws.com"
@@ -127,7 +134,7 @@ def test_legacy_global_endpoint():
 def test_legacy_global_endpoint_us_east():
     host = "s3.amazonaws.com"
     fixtures = [
-        # (url, path, region)
+        # (url, key, region)
         (f"http://{host}/{bucket}/{key}", key, ''),
         (f"s3://{host}/{bucket}", '', ''),
         (f"https://{host}/{bucket}/", '', ''),
@@ -145,7 +152,7 @@ def test_legacy_s3_region():
     host = f"{bucket}.s3-{region}.amazonaws.com"
 
     fixtures = [
-        # (url, region)
+        # (url, key, region)
         (f"https://{host}/{key}", key, region),
         (f"s3://{host}/", "", region),
         (f"http://{host}", "", region),
