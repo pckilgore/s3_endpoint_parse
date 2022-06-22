@@ -4,6 +4,7 @@ bucket = "my-bucket"
 key = "path/to/object"
 region = "xyz-to-nowhere"
 
+
 def test_invalid_empty():
     result = parse("")
     assert result["match"] is False
@@ -29,20 +30,20 @@ def virtual_hosted_style():
     fixtures = [
         # (url, path, region)
         (f"https://{host}/{key}", key, region),
-        (f"http://{host}/", '', region),
-        (f"s3://{host}", '', region),
+        (f"http://{host}/", "", region),
+        (f"s3://{host}", "", region),
         (f"https://{host_fips}/{key}", key, region),
-        (f"http://{host_fips}/", '', region),
-        (f"s3://{host_fips}", '', region),
+        (f"http://{host_fips}/", "", region),
+        (f"s3://{host_fips}", "", region),
         (f"https://{host_dual}/{key}", key, region),
-        (f"http://{host_dual}/", '', region),
-        (f"s3://{host_dual}", '', region),
+        (f"http://{host_dual}/", "", region),
+        (f"s3://{host_dual}", "", region),
         (f"https://{host_both}/{key}", key, region),
-        (f"http://{host_both}/", '', region),
-        (f"s3://{host_both}", '', region),
+        (f"http://{host_both}/", "", region),
+        (f"s3://{host_both}", "", region),
         (f"https://{host_cn}/{key}", key, region),
-        (f"http://{host_cn}/", '', region),
-        (f"s3://{host_cn}", '', region),
+        (f"http://{host_cn}/", "", region),
+        (f"s3://{host_cn}", "", region),
     ]
 
     for (url, want_key, want_region) in fixtures:
@@ -62,17 +63,17 @@ def test_path_style():
     fixtures = [
         # (url, path, region)
         (f"https://{host}/{bucket}/{key}", key, region),
-        (f"http://{host}/{bucket}/", '', region),
-        (f"s3://{host}/{bucket}", '', region),
+        (f"http://{host}/{bucket}/", "", region),
+        (f"s3://{host}/{bucket}", "", region),
         (f"s3://{host_fips}/{bucket}/{key}", key, region),
-        (f"https://{host_fips}/{bucket}/", '', region),
-        (f"http://{host_fips}/{bucket}", '', region),
+        (f"https://{host_fips}/{bucket}/", "", region),
+        (f"http://{host_fips}/{bucket}", "", region),
         (f"https://{host_dual}/{bucket}/{key}", key, region),
-        (f"s3://{host_dual}/{bucket}/", '', region),
-        (f"http://{host_dual}/{bucket}", '', region),
+        (f"s3://{host_dual}/{bucket}/", "", region),
+        (f"http://{host_dual}/{bucket}", "", region),
         (f"https://{host_both}/{bucket}/{key}", key, region),
-        (f"https://{host_both}/{bucket}/", '', region),
-        (f"s3://{host_both}/{bucket}", '', region),
+        (f"https://{host_both}/{bucket}/", "", region),
+        (f"s3://{host_both}/{bucket}", "", region),
     ]
 
     for (url, want_key, want_region) in fixtures:
@@ -88,8 +89,8 @@ def test_path_style_no_match_no_bucket():
 
     fixtures = [
         # (url, path, region)
-        (f"http://{host}/", '', region),
-        (f"s3://{host}", '', region),
+        (f"http://{host}/", "", region),
+        (f"s3://{host}", "", region),
     ]
 
     for (url, _, _) in fixtures:
@@ -101,9 +102,9 @@ def test_legacy_global_endpoint():
     host = f"{bucket}.s3.amazonaws.com"
     fixtures = [
         # (url, path, region)
-        (f"https://{host}/{key}", key, ''),
-        (f"http://{host}/", '', ''),
-        (f"s3://{host}", '', ''),
+        (f"https://{host}/{key}", key, ""),
+        (f"http://{host}/", "", ""),
+        (f"s3://{host}", "", ""),
     ]
 
     for (url, want_key, want_region) in fixtures:
@@ -118,9 +119,9 @@ def test_legacy_global_endpoint():
     host = f"{bucket}.s3.amazonaws.com"
     fixtures = [
         # (url, path, region)
-        (f"https://{host}/{key}", key, ''),
-        (f"http://{host}/", '', ''),
-        (f"s3://{host}", '', ''),
+        (f"https://{host}/{key}", key, ""),
+        (f"http://{host}/", "", ""),
+        (f"s3://{host}", "", ""),
     ]
 
     for (url, want_key, want_region) in fixtures:
@@ -135,9 +136,9 @@ def test_legacy_global_endpoint_us_east():
     host = "s3.amazonaws.com"
     fixtures = [
         # (url, key, region)
-        (f"http://{host}/{bucket}/{key}", key, ''),
-        (f"s3://{host}/{bucket}", '', ''),
-        (f"https://{host}/{bucket}/", '', ''),
+        (f"http://{host}/{bucket}/{key}", key, ""),
+        (f"s3://{host}/{bucket}", "", ""),
+        (f"https://{host}/{bucket}/", "", ""),
     ]
 
     for (url, want_key, want_region) in fixtures:
@@ -177,10 +178,8 @@ def test_protocol_parse():
         (f"my-s3-protocol://{endpoint}", "my-s3-protocol"),
         (f"://{endpoint}", ""),
         (endpoint, ""),
-
     ]
 
     for (url, want_proto) in fixtures:
         got = parse(url)
         assert got["protocol"] == want_proto
-
