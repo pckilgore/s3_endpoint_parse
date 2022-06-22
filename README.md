@@ -34,7 +34,7 @@ s3 = parse("https://s3.amazonaws.com/my-bucket/my/cool/file.png")
 
 assert s3["protocol"] == "https"
 assert s3["bucket"] == "my-bucket"
-assert s3["region"] == "us-east-1"
+assert s3["region"] == ""
 assert s3["key"] == "my/cool/file.png"
 
 
