@@ -5,35 +5,44 @@ Virtual Hosted Style
 
 http://BUCKET.s3.REGION.amazonaws.com/KEY
 """
-virtual_hosted_style = compile(r'^([^:]+)(?:://)([^.]+)\.s3(?:-fips|\.dualstack|-fips\.dualstack)?\.([^.]+)\.amazonaws\.com(?:\.cn)?/?(.*?)$')
+virtual_hosted_style = compile(
+    r"^([^:]+)(?:://)([^.]+)\.s3(?:-fips|\.dualstack|-fips\.dualstack)?\.([^.]+)\.amazonaws\.com(?:\.cn)?/?(.*?)$"
+)
 
 """
 Path Style
 
 http://s3.REGION.amazonaws.com/BUCKET/KEY
 """
-path_style = compile(r'^([^:]+)(?:://)s3(?:-fips|\.dualstack|-fips\.dualstack)?\.([^.]+)\.amazonaws\.com(?:\.cn)?/([^/]+)/?(.*?)$')
+path_style = compile(
+    r"^([^:]+)(?:://)s3(?:-fips|\.dualstack|-fips\.dualstack)?\.([^.]+)\.amazonaws\.com(?:\.cn)?/([^/]+)/?(.*?)$"
+)
 
 """
 Legacy Style Global Endpoint
 
 http://BUCKET.s3.amazonaws.com/KEY
 """
-legacy_global_endpoint = compile(r'^([^:]+)(?:://)([^.]+)\.s3\.amazonaws\.com/?(.*?)$')
+legacy_global_endpoint = compile(r"^([^:]+)(?:://)([^.]+)\.s3\.amazonaws\.com/?(.*?)$")
 
 """
 Legacy Style Global Endpoint With Path
 
 http://s3.amazonaws.com/BUCKET/KEY
 """
-legacy_global_endpoint_with_path = compile(r'^([^:]+)(?:://)s3\.amazonaws\.com?/([^/]+)/?(.*?)$')
+legacy_global_endpoint_with_path = compile(
+    r"^([^:]+)(?:://)s3\.amazonaws\.com?/([^/]+)/?(.*?)$"
+)
 
 """
 Legacy s3-region Style
 
 https://BUCKET.s3-REGION.amazonaws.com/KEY
 """
-legacy_s3region_style = compile(r'^([^:]+)(?:://)([^.]+)\.s3-([^.]+)\.amazonaws\.com/?(.*?)$')
+legacy_s3region_style = compile(
+    r"^([^:]+)(?:://)([^.]+)\.s3-([^.]+)\.amazonaws\.com/?(.*?)$"
+)
+
 
 def parse(url):
     """
@@ -64,10 +73,10 @@ def parse(url):
 
     result = {
         "match": False,
-        "protocol": '',
-        "bucket": '',
-        "key": '',
-        "region": '',
+        "protocol": "",
+        "bucket": "",
+        "key": "",
+        "region": "",
     }
 
     match = virtual_hosted_style.match(url)

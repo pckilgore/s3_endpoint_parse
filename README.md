@@ -1,4 +1,8 @@
 # s3-endpoint-parse
+[![PyPI version](https://badge.fury.io/py/s3_endpoint_parse.svg)](https://pypi.org/project/s3-endpoint-parse/)
+[![Supported Version](https://img.shields.io/pypi/pyversions/s3-endpoint-parse.svg)](https://pypi.org/project/s3-endpoint-parse)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![Tests](https://github.com/pckilgore/s3_endpoint_parse/actions/workflows/test.yml/badge.svg)
 
 Flexibly parses well-formed S3 URL/URIs, including legacy formats and new
 fips / dualstack formats, and for Chinese (中国) regions.
@@ -7,11 +11,11 @@ Returns a dictionary describing the endpoint:
 
 ```python
 {
-  "match": bool,       # True if library matched
-  "protocol": string,  # May be empty
-  "bucket": string,    # Set if match is True
-  "key": string,       # May be empty
-  "region": string,    # May be empty
+    "match": bool,  # True if library matched
+    "protocol": string,  # May be empty
+    "bucket": string,  # Set if match is True
+    "key": string,  # May be empty
+    "region": string,  # May be empty
 }
 ```
 
@@ -54,7 +58,9 @@ assert s3["region"] == "us-east-1"
 assert s3["key"] == "my/cool/file.png"
 
 
-s3 = parse("https://my-bucket.s3-fips.dualstack.us-east-1.amazonaws.com/my/cool/file.png")
+s3 = parse(
+    "https://my-bucket.s3-fips.dualstack.us-east-1.amazonaws.com/my/cool/file.png"
+)
 
 assert s3["protocol"] == "https"
 assert s3["bucket"] == "my-bucket"
