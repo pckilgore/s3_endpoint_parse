@@ -1,5 +1,6 @@
 # s3-endpoint-parse
 [![PyPI version](https://badge.fury.io/py/s3_endpoint_parse.svg)](https://pypi.org/project/s3-endpoint-parse/)
+[![Supported Version](https://img.shields.io/pypi/pyversions/s3-endpoint-parse.svg)](https://pypi.org/project/s3-endpoint-parse)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![Tests](https://github.com/pckilgore/s3_endpoint_parse/actions/workflows/test.yml/badge.svg)
 
